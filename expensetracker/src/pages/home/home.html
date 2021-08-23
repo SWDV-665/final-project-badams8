@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3 text-center *ngIf="loadExpenses().length == 0" color="danger">
+    No Expenses Listed Currently
+  </h3>
+  <ion-list>
+    <ion-item-sliding *ngFor="let expense of loadExpenses(); let i = index">
+      <ion-item>
+        <h2>Name: {{expense.name}}</h2>
+        <p>Quantity: {{expense.quantity}}</p>
+        <p>Price: ${{expense.price}}</p>
+      </ion-item>
+      <ion-item-options>
+        <button (click)="editExpense(expense, i)" ion-button color="secondary" icon-start>
+          <ion-icon name="create"></ion-icon>
+          Edit
+        </button>
+        <button (click)="captureReceipt()" ion-button color="primary" icon-start>
+          <ion-icon name="camera"></ion-icon>
+          Photo
+        </button>
+        <button (click)="shareExpense(expense, i)" ion-button color="light" icon-start>
+          <ion-icon name="share-alt"></ion-icon>
+          Share
+        </button>
+        <button (click)="deleteExpense(expense, i)" ion-button color="danger" icon-start>
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-fab top right edge>
+    <button (click)="addExpense()" ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
